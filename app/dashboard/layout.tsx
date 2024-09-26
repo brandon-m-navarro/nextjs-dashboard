@@ -1,5 +1,9 @@
 import SideNav from '@/app/ui/dashboard/sidenav';
- 
+
+export const experimental_ppr = true; // Next.js will prerender the static parts of the route
+                                      // and defer the dynamic parts until the user requests them.
+
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
