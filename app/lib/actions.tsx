@@ -101,7 +101,7 @@ export async function updateInvoice(id: string, prevState: State, formData: Form
       WHERE id = ${id}
     `;
   } catch (error) {
-    return new Error('ERROR: Unable to update Invoice - ' + error);
+    return { message: 'Database Error: Failed to Update Invoice.' };
   }
  
   revalidatePath('/dashboard/invoices');
@@ -114,7 +114,7 @@ export async function deleteInvoice(id: string) {
     revalidatePath('/dashboard/invoices');
     return { message: 'Deleted Invoice.' };
   } catch (error) {
-    return new Error('ERROR: Unable to delete Invoice - ' + error);
+    return { message: 'Database Error: Failed to Delete Invoice.' };
   }
 }
 
