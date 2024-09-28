@@ -1,10 +1,13 @@
-import AcmeLogo from '@/app/ui/acme-logo';
-import LoginForm from '@/app/ui/login-form';
-import { Metadata } from 'next';
- 
+import AcmeLogo from "@/app/ui/acme-logo";
+import LoginForm from "@/app/ui/login-form";
+import { Metadata } from "next";
+import { Suspense } from 'react';
+import DemoCredentials from "../ui/demo-credentials";
+
 export const metadata: Metadata = {
-  title: 'Login',
+  title: "Login",
 };
+
 
 export default function LoginPage() {
   return (
@@ -15,7 +18,10 @@ export default function LoginPage() {
             <AcmeLogo />
           </div>
         </div>
-        <LoginForm />
+        <Suspense>
+          <LoginForm />
+        </Suspense>
+        <DemoCredentials />
       </div>
     </main>
   );
