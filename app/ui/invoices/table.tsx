@@ -3,6 +3,7 @@ import { UpdateInvoice, DeleteInvoice } from '@/app/ui/invoices/buttons';
 import InvoiceStatus from '@/app/ui/invoices/status';
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 import { fetchFilteredInvoices } from '@/app/lib/data';
+import clsx from 'clsx';
 
 export default async function InvoicesTable({
   query,
@@ -15,7 +16,21 @@ export default async function InvoicesTable({
 
   return (
     <div className="mt-6 flow-root">
-      <div className="inline-block min-w-full align-middle">
+      <div className={clsx(
+        "mt-6 flow-root",
+        {
+          'hidden': invoices.length > 0
+        },
+      )}>
+        No invoices found
+      </div>
+
+      <div className={clsx(
+        "inline-block min-w-full align-middle",
+        {
+          'hidden': invoices.length === 0
+        },
+        )}>
         <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
           <div className="md:hidden">
             {invoices?.map((invoice) => (

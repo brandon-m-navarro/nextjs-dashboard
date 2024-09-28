@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { fetchFilteredCustomers } from '@/app/lib/data';
+import clsx from 'clsx';
 
 export default async function CustomersTable({
   query,
@@ -9,10 +10,24 @@ export default async function CustomersTable({
   // currentPage: number;
 }) {
   const customers = await fetchFilteredCustomers(query);
+  console.log(customers);
 
   return (
     <div className="w-full">
-      <div className="mt-6 flow-root">
+      <div className={clsx(
+        "mt-6 flow-root",
+        {
+          'hidden': customers.length > 0
+        },
+      )}>
+        No customers found
+      </div>
+      <div className={clsx(
+        "mt-6 flow-root",
+        {
+          'hidden': customers.length === 0
+        },
+      )}>
         <div className="overflow-x-auto">
           <div className="inline-block min-w-full align-middle">
             <div className="overflow-hidden rounded-md bg-gray-50 p-2 md:pt-0">
