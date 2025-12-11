@@ -1,4 +1,3 @@
-'use client'
 import Image from 'next/image';
 import { fetchFilteredCustomers } from '@/lib/data';
 import clsx from 'clsx';
