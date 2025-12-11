@@ -1,13 +1,14 @@
+'use client'
 import AcmeLogo from "@/app/ui/acme-logo";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { authClient } from "@/lib/auth-client";
 import { lusitana } from "@/app/ui/fonts";
 import Image from "next/image";
-import { Metadata } from "next";
+// import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Dashboard",
-};
+// export const metadata: Metadata = {
+//   title: "Dashboard",
+// };
 
 export default function Page() {
   const login = async function () {
@@ -37,7 +38,6 @@ export default function Page() {
           </p>
           <button
             onClick={() => {
-              'use client'
               login();
             }}
             className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
