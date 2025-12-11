@@ -1,37 +1,42 @@
-import AcmeLogo from '@/app/ui/acme-logo';
-import { ArrowRightIcon } from '@heroicons/react/24/outline';
-import { authClient } from '@/lib/auth-client';
-import { lusitana } from '@/app/ui/fonts';
-import Image from 'next/image';
-import { Metadata } from 'next';
+import AcmeLogo from "@/app/ui/acme-logo";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import { authClient } from "@/lib/auth-client";
+import { lusitana } from "@/app/ui/fonts";
+import Image from "next/image";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Dashboard',
+  title: "Dashboard",
 };
 
 export default function Page() {
+  const login = async function () {
+    await authClient.signIn.social({
+      provider: "bnav-oidc", // Matches your auth.ts configuration
+      callbackURL: "/dashboard", // Optional redirect after login
+    });
+  };
+
   return (
     <main className="flex min-h-screen flex-col p-6">
       <div className="flex h-20 items-center shrink-0 items-end rounded-lg bg-blue-500 p-4 md:h-30">
-        { <AcmeLogo /> }
+        {<AcmeLogo />}
       </div>
       <div className="mt-4 flex grow flex-col gap-4 md:flex-row">
         <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-10 md:w-2/5 md:px-20">
-        <div className="hidden" />
-          <p className={`text-xl text-gray-800 md:text-xl md:leading-normal ${lusitana.className} antialiased`}>
-            <strong>Welcome to Brandon Inc.</strong> This project was built following a {' '}
+          <div className="hidden" />
+          <p
+            className={`text-xl text-gray-800 md:text-xl md:leading-normal ${lusitana.className} antialiased`}
+          >
+            <strong>Welcome to Brandon Inc.</strong> This project was built
+            following a{" "}
             <a href="https://nextjs.org/learn/" className="text-blue-500">
               Next.js course
             </a>
             .
           </p>
           <button
-            onClick={async () => {
-              await authClient.signIn.social({
-                provider: "bnav-oidc", // Matches your auth.ts configuration
-                callbackURL: "/dashboard", // Optional redirect after login
-              });
-            }}
+            onClick={login}
             className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
           >
             <span>Log in</span> <ArrowRightIcon className="w-5 md:w-6" />

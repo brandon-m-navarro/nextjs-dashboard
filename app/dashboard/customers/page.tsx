@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-// import Table from "@/app/ui/customers/table";
-// import { TableRowSkeleton } from "@/app/ui/skeletons";
+import Table from "@/app/ui/customers/table";
+import { TableRowSkeleton } from "@/app/ui/skeletons";
 import { Suspense } from "react";
 import Search from "@/app/ui/search";
 import { lusitana } from "@/app/ui/fonts";
@@ -19,7 +19,6 @@ export default async function Page({
 }) {
   const query = searchParams?.query || "";
   const currentPage = Number(searchParams?.page) || 1;
-  console.log(query, currentPage)
   return (
     <div className="w-full">
       <div className="flex w-full items-center justify-between">
@@ -32,9 +31,9 @@ export default async function Page({
         </Suspense>
       </div>
 
-      {/* <Suspense key={query + currentPage} fallback={<TableRowSkeleton />}>
+      <Suspense key={query + currentPage} fallback={<TableRowSkeleton />}>
         <Table query={query} />
-      </Suspense> */}
+      </Suspense>
     </div>
   );
 }
