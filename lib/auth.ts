@@ -10,7 +10,7 @@ export const auth = betterAuth({
     provider: "postgresql",
   }),
   secret: process.env.AUTH_SECRET!,
-  baseURL: "https://todo.bnav.dev", // The base URL of THIS client app
+  baseURL: "https://dash.bnav.dev", // The base URL of THIS client app
   plugins: [
     genericOAuth({
       config: [
