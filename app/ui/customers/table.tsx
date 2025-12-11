@@ -1,13 +1,12 @@
+'use client'
 import Image from 'next/image';
 import { fetchFilteredCustomers } from '@/lib/data';
 import clsx from 'clsx';
 
 export default async function CustomersTable({
   query,
-  // currentPage,
 }: {
   query: string;
-  // currentPage: number;
 }) {
   const customers = await fetchFilteredCustomers(query);
   console.log(customers);
