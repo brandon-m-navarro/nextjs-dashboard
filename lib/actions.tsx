@@ -4,7 +4,6 @@ import { z } from 'zod';
 import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { authClient } from './auth-client';
 import { prisma } from './prisma';
 
 // Use Zod to update the expected types
@@ -128,19 +127,5 @@ export async function deleteInvoice(id: string) {
     return { message: 'Deleted Invoice.' };
   } catch (error) {
     return { message: 'Database Error: Failed to Delete Invoice.' + error};
-  }
-}
-
-export async function authenticate(
-  prevState: string | undefined,
-  formData: FormData,
-) {
-  try {
-    await authClient.signIn.social({
-      provider: "bnav-oidc", // Matches your auth.ts configuration
-      callbackURL: "/dashboard", // Optional redirect after login
-    });
-  } catch (error) {
-    throw error;
   }
 }
