@@ -4,12 +4,10 @@ import { z } from 'zod';
 import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { signIn } from '@/auth';
-import { AuthError } from 'next-auth';
+import { authClient } from './auth-client';
+import { prisma } from './prisma';
 
 // Use Zod to update the expected types
-// const UpdateInvoice = FormSchema.omit({ id: true, date: true });
-
 const FormSchema = z.object({
   id: z.string(),
   customerId: z.string({
@@ -35,7 +33,7 @@ export type State = {
   };
   message?: string | null;
 };
- 
+
 export async function createInvoice(prevState: State, formData: FormData) {
   // Validate form using Zod
   const validatedFields = CreateInvoice.safeParse({
@@ -59,10 +57,18 @@ export async function createInvoice(prevState: State, formData: FormData) {
  
   // Insert data into the database
   try {
-    await sql`
-      INSERT INTO invoices (customer_id, amount, status, date)
-      VALUES (${customerId}, ${amountInCents}, ${status}, ${date})
-    `;
+    // await sql`
+    //   INSERT INTO invoices (customer_id, amount, status, date)
+    //   VALUES (${customerId}, ${amountInCents}, ${status}, ${date})
+    // `;
+    await prisma.invoices.create({
+      data: {
+        customer_id: customerId,
+        amount: amountInCents,
+        status,
+        date
+      }
+    })
   } catch (error) {
     // If a database error occurs, return a more specific error.
     return {
@@ -92,14 +98,21 @@ export async function updateInvoice(id: string, prevState: State, formData: Form
     };
   }
  
-  const amountInCents = validatedFields.data.amount * 100;
+  const amountInCents = validatedFields.data.amount * 100,
+        updatedStatus = validatedFields.data.status,
+        updatedCustomerId = validatedFields.data.customerId;
  
   try {
-    await sql`
-      UPDATE invoices
-      SET customer_id = ${validatedFields.data.customerId}, amount = ${amountInCents}, status = ${validatedFields.data.status}
-      WHERE id = ${id}
-    `;
+    prisma.invoices.update({
+      where: {
+        id: id
+      },
+      data: {
+        amount: amountInCents,
+        status: updatedStatus,
+        customer_id: updatedCustomerId
+      }
+    });
   } catch (error) {
     return { message: 'Database Error: Failed to Update Invoice.' + error};
   }
@@ -123,16 +136,12 @@ export async function authenticate(
   formData: FormData,
 ) {
   try {
-    await signIn('credentials', formData);
+    // await signIn('credentials', formData);
+    await authClient.signIn.social({
+      provider: "bnav-oidc", // Matches your auth.ts configuration
+      callbackURL: "/dashboard", // Optional redirect after login
+    });
   } catch (error) {
-    if (error instanceof AuthError) {
-      switch (error.type) {
-        case 'CredentialsSignin':
-          return 'Invalid credentials.';
-        default:
-          return 'Something went wrong.';
-      }
-    }
     throw error;
   }
 }

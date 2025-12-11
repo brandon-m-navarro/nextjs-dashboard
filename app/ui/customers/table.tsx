@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { fetchFilteredCustomers } from '@/app/lib/data';
+import { fetchFilteredCustomers } from '@/lib/data';
 import clsx from 'clsx';
 
 export default async function CustomersTable({

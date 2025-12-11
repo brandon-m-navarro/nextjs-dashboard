@@ -1,7 +1,7 @@
 "use client";
 import { lusitana } from "../ui/fonts";
 import { InformationCircleIcon, CheckIcon } from "@heroicons/react/24/outline";
-import { copyTextToClipboard } from "../lib/utils";
+import { copyTextToClipboard } from "../../lib/utils";
 import { useState } from "react";
 
 export default function DemoCredentials() {
