@@ -136,7 +136,6 @@ export async function authenticate(
   formData: FormData,
 ) {
   try {
-    // await signIn('credentials', formData);
     await authClient.signIn.social({
       provider: "bnav-oidc", // Matches your auth.ts configuration
       callbackURL: "/dashboard", // Optional redirect after login
