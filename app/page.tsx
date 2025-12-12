@@ -4,11 +4,6 @@ import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { authClient } from "@/lib/auth-client";
 import { lusitana } from "@/app/ui/fonts";
 import Image from "next/image";
-// import { Metadata } from "next";
-
-// export const metadata: Metadata = {
-//   title: "Dashboard",
-// };
 
 export default function Page() {
   const login = async function () {
@@ -34,7 +29,7 @@ export default function Page() {
             <a href="https://nextjs.org/learn/" className="text-blue-500">
               Next.js course
             </a>
-            .
+            , but has since been adapted use actual authentication via integration to my SSO ecosystem.
           </p>
           <button
             onClick={() => {
