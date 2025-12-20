@@ -29,7 +29,7 @@ export default function Page() {
             <a href="https://nextjs.org/learn/" className="text-blue-500">
               Next.js course
             </a>
-            , but has since been adapted use actual authentication via integration to my SSO ecosystem.
+            {`, but I've since adapted it to support actual authentication via integration to my SSO ecosystem.`}
           </p>
           <button
             onClick={() => {
