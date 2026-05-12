@@ -4,6 +4,7 @@ import InvoiceStatus from '@/app/ui/invoices/status';
 import { formatDateToLocal, formatCurrency } from '@/lib/utils';
 import { fetchFilteredInvoices } from '@/lib/data';
 import clsx from 'clsx';
+import { InvoicesTableType } from '@/lib/definitions';
 
 export default async function InvoicesTable({
   query,
@@ -12,7 +13,7 @@ export default async function InvoicesTable({
   query: string;
   currentPage: number;
 }) {
-  const invoices = await fetchFilteredInvoices(query, currentPage);
+  const invoices:InvoicesTableType[] = await fetchFilteredInvoices(query, currentPage);
 
   return (
     <div className="mt-6 flow-root">

@@ -8,7 +8,7 @@ import Image from "next/image";
 export default function Page() {
   const login = async function () {
     await authClient.signIn.social({
-      provider: "bnav-oidc", // Matches your auth.ts configuration
+      provider: "bnav-oidc", // Matches auth.ts configuration
       callbackURL: "/dashboard", // Optional redirect after login
     });
   };

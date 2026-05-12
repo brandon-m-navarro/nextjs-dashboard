@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { fetchFilteredCustomers } from '@/lib/data';
+import { CustomersTableType } from '@/lib/definitions';
 import clsx from 'clsx';
 
 export default async function CustomersTable({
@@ -7,8 +8,7 @@ export default async function CustomersTable({
 }: {
   query: string;
 }) {
-  const customers = await fetchFilteredCustomers(query);
-  console.log(customers);
+  const customers : CustomersTableType[] = await fetchFilteredCustomers(query);
 
   return (
     <div className="w-full">
