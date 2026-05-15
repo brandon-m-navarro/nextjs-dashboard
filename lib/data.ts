@@ -141,10 +141,10 @@ export async function fetchInvoicesPages(query: string) {
     const count = await prisma.invoices.count({
       where: {
         OR: [
-          { customers: { name: { contains: query, mode: 'insensitive' } } },
-          { customers: { email: { contains: query, mode: 'insensitive' } } },
+          { customer: { name: { contains: query, mode: 'insensitive' } } },
+          { customer: { email: { contains: query, mode: 'insensitive' } } },
           { amount: { equals: parseFloat(query) || undefined } },
-          { date: { equals: query || undefined } },
+          // { date: { equals: query || undefined } },
           { status: { contains: query, mode: 'insensitive' } },
         ],
       },
