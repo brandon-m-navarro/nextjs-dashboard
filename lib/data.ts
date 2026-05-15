@@ -144,7 +144,7 @@ export async function fetchInvoicesPages(query: string) {
           { customers: { name: { contains: query, mode: 'insensitive' } } },
           { customers: { email: { contains: query, mode: 'insensitive' } } },
           { amount: { equals: parseFloat(query) || undefined } },
-          { date: { equals: new Date(query) || undefined } },
+          { date: { equals: query || undefined } },
           { status: { contains: query, mode: 'insensitive' } },
         ],
       },
