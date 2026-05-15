@@ -122,11 +122,9 @@ export async function fetchFilteredInvoices(
           { customer: { name: { contains: query, mode: "insensitive" } } },
           { customer: { email: { contains: query, mode: "insensitive" } } },
           { amount: { equals: parseFloat(query) || undefined } },
-          // { date: { equals: new Date(query) || undefined } },
           ...(isValidDate(query)
             ? [{ date: { equals: new Date(query) } }]
             : []),
-
           { status: { contains: query, mode: "insensitive" } },
         ],
       },

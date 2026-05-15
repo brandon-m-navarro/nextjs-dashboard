@@ -12,13 +12,14 @@ export const metadata: Metadata = {
 export default async function Page({
   searchParams,
 }: {
-  searchParams?: {
+  searchParams?: Promise<{
     query?: string;
     page?: string;
-  };
+  }>;
 }) {
-  const query = searchParams?.query || "";
-  const currentPage = Number(searchParams?.page) || 1;
+  const sParams = await searchParams;
+  const query = sParams?.query || "";
+  const currentPage = Number(sParams?.page) || 1;
   return (
     <div className="w-full">
       <div className="flex w-full items-center justify-between">
