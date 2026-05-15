@@ -28,9 +28,9 @@ export async function fetchLatestInvoices() {
   try {
     const invoices = await prisma.invoices.findMany({
       take: 5,
-      orderBy: {
-        date: 'desc',
-      },
+      // orderBy: {
+      //   date: 'desc',
+      // },
       include: {
         customer: true,
       },
@@ -104,9 +104,9 @@ export async function fetchFilteredInvoices(
     const invoices = await prisma.invoices.findMany({
       skip: offset,
       take: ITEMS_PER_PAGE,
-      orderBy: {
-        date: 'desc',
-      },
+      // orderBy: {
+      //   date: 'desc',
+      // },
       include: {
         customer: true,
       },
@@ -115,7 +115,7 @@ export async function fetchFilteredInvoices(
           { customer: { name: { contains: query, mode: 'insensitive' } } },
           { customer: { email: { contains: query, mode: 'insensitive' } } },
           { amount: { equals: parseFloat(query) || undefined } },
-          { date: { equals: new Date(query) || undefined } },
+          // { date: { equals: new Date(query) || undefined } },
           { status: { contains: query, mode: 'insensitive' } },
         ],
       },
